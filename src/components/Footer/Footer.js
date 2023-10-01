@@ -2,11 +2,12 @@
 import React from 'react';
 import './Footer.css';
 
+import { FormattedMessage } from "react-intl";
 function Footer() {
     return (
         <div className="footer">
             <p className="contacto">
-                Contact us: +57 3102105253 - info@elaromamagico.com - @elaromamagico
+                <FormattedMessage id="TextoFooter"/>
             </p>
         </div>
     );
