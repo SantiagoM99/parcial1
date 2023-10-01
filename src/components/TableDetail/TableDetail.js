@@ -1,73 +1,49 @@
 import { useState, useEffect } from "react";
-const data = [
-        {
-            "id": 1,
-            "nombre": "Café Espresso",
-            "tipo": "Espresso",
-            "region": "Italia"
-        },
-        {
-            "id": 2,
-            "nombre": "Café Antioqueño",
-            "tipo": "Tueste Oscuro",
-            "region": "Colombia"
-        },
-        {
-            "id": 3,
-            "nombre": "Café Etiopiano",
-            "tipo": "Yirgacheffe",
-            "region": "Etiopía"
-        },
-        {
-            "id": 4,
-            "nombre": "Café Francés",
-            "tipo": "Café con Leche",
-            "region": "Francia"
-        },
-        {
-            "id": 5,
-            "nombre": "Café Kona",
-            "tipo": "Kona",
-            "region": "Hawái"
-        }
-    ];
+import "./TableDetail.css";
+import { FormattedMessage } from "react-intl";
 
-function TableDetail(cafeId) {
+function TableDetail({cafeId}) {
+    console.log(cafeId);
         const [Cafe, setCafe] = useState({});
-        
-        
         useEffect(() => {
-            const foundCafe = data.find(item => item.id === cafeId);
-            if (foundCafe) {
-                console.log('encontrado'+ foundCafe);
-                setCafe(foundCafe);
-            }
+            const urlBack = `http://localhost:3001/cafes/${cafeId}`;
+            fetch(urlBack)
+                .then(response => response.json())
+                .then(data => {
+                    setCafe(data);
+                });
         }, [cafeId]);
     
 
     return (
-        <div className="card mb-3">
-            <strong>
+        <div className="estiloCard" style={{paddingTop:'0.5rem'}}>
+            <strong style={{textTransform: 'uppercase'}}>
                 {Cafe.nombre}
             </strong>
             <p>
                 {Cafe.fecha_cultivo}
             </p>
-            <div className="card-body">
+            <div className="card-body" style={{paddingBottom: "0.5rem",paddingInline:'1rem'}}>
                 <img
                     style={{ width: "116px", height: "150px" }}
                     variant="top"
                     src={Cafe.imagen}
                     alt={Cafe.nombre}
                 />
-                <p>
+
+                <p style={{margin:0,padding:0}}> 
+                    <FormattedMessage id="Notas"/>
                 </p>
-                <p>
+                <p style={{marginTop:0,padding:0}}>
                     {Cafe.notas}
                 </p>
-                <br />
+
                 <strong>
+                    <FormattedMessage id="CultivadoEn"/>
+                    {" "}
                     {Cafe.altura}
+                    {" "}
+                    <FormattedMessage id="Nivel"/>
                 </strong>
             </div>
         </div>

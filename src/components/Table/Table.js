@@ -1,58 +1,34 @@
 import { Col, Row } from 'react-bootstrap';
-import Cafe from '../TableDetail/TableDetail';
-import { useState } from 'react';
+import TableDetail from '../TableDetail/TableDetail';
+import { useState,useEffect } from 'react';
+import './Table.css';
+import { FormattedMessage } from "react-intl";
 
-const data = [
-    {
-      "id": 1,
-      "nombre": "Café Espresso",
-      "tipo": "Espresso",
-      "region": "Italia"
-    },
-    {
-      "id": 2,
-      "nombre": "Café Antioqueño",
-      "tipo": "Tueste Oscuro",
-      "region": "Colombia"
-    },
-    {
-      "id": 3,
-      "nombre": "Café Etiopiano",
-      "tipo": "Yirgacheffe",
-      "region": "Etiopía"
-    },
-    {
-      "id": 4,
-      "nombre": "Café Francés",
-      "tipo": "Café con Leche",
-      "region": "Francia"
-    },
-    {
-      "id": 5,
-      "nombre": "Café Kona",
-      "tipo": "Kona",
-      "region": "Hawái"
-    }
-  ];
-  
-
-function Cafes() {
+function Table() {
     
-    const [cafes, setCafes] = useState(data);
-    const [cofeeId, setId] = useState(undefined);
-
-    const handleRowClick = (cafeId) => {
-        if (cofeeId === cafeId) {
+    const [cafes, setCafes] = useState([]);
+    const [cafeId, setId] = useState(undefined);
+    
+    useEffect(() => {
+        const urlBack = 'http://localhost:3001/cafes';
+        fetch(urlBack)
+            .then(response => response.json())
+            .then(data => {
+                setCafes(data);
+            });
+    }, []);
+    const handleRowClick = (cafe_Id) => {
+        if (cafeId === cafe_Id) {
             setId(undefined);
         } else {
-            console.log(cafeId);
-            setId(cafeId);
+            console.log(cafe_Id);
+            setId(cafe_Id);
         }
-    }
+        }
 
     const showDetail = () => {
-        if (cofeeId!== undefined) {
-            return <Cafe id={cofeeId} />
+        if (cafeId!== undefined) {
+            return <TableDetail cafeId={cafeId} />
         } else {
             return null
         }
@@ -61,18 +37,24 @@ function Cafes() {
         <Row>
             <Col lg="8">
                 <table className="table">
-                    <thead className="table-dark">
+                    <thead className="table-dark"  style={{textAlign:'left'}}>
                         <tr>
                             <th>#</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Region</th>
+                            <th>
+                                <FormattedMessage id="Nombre"/>
+                            </th>
+                            <th>
+                                <FormattedMessage id="Tipo"/>
+                            </th>
+                            <th>
+                                <FormattedMessage id="Region"/>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {cafes.map((item) => (
-                            <tr key={item.id} onClick={() => handleRowClick(item.id)}>
-                                <td>{item.id}</td>
+                        {cafes.map((item,index) => (
+                            <tr key={index} onClick={() => handleRowClick(item.id)}  style={{textAlign:'left'}}>
+                                <td><strong>{item.id}</strong></td>
                                 <td>{item.nombre}</td>
                                 <td>{item.tipo}</td>
                                 <td>{item.region}</td>
@@ -86,6 +68,4 @@ function Cafes() {
             </Col>
         </Row>
     );
-}
-
-export default Cafes;
+} export default Table;

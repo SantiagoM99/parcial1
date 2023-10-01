@@ -1,0 +1,20 @@
+{
+    "Login":"Login",
+    "Usuario":"Username",
+    "Contraseña":"Password",
+    "Ingresar":"Log In",
+    "Cancelar":"Cancel",
+    "MsgErrorLogin":"Authentication Error. Check your credentials",
+    
+    
+    "Nombre":"Name",
+    "Tipo":"Type",
+    "Region":"Region",
+    
+    "Notas":"Notes",
+    "CultivadoEn":"Cultivated at a height of",
+    "Nivel":"masl",
+    
+    "TextoFooter":"Contact us: +57 3102105253 - info@elaromamagico.com - @elaromamagico"
+    
+}

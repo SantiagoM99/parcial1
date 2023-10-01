@@ -1,0 +1,21 @@
+{
+    "Login":"Inicio de sesión",
+    "Usuario":"Nombre de Usuario",
+    "Contraseña":"Contraseña",
+    "Ingresar":"Ingresar",
+    "Cancelar":"Cancelar",
+    "MsgErrorLogin":"Error de autenticación. Revise sus credenciales",
+    
+    "Nombre":"Nombre",
+    "Tipo":"Tipo",
+    "Region":"Región",
+    
+    "Notas":"Notas",
+    "CultivadoEn":"Cultivado a una altura de",
+    "Nivel":"msnm",
+    
+    "TextoFooter":"Contáctenos: +57 3102105253 - info@elaromamagico.com - @elaromamagico"
+    
+    
+    
+}

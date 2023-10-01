@@ -2,14 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import localeEsMessages from "./locales/es";
+import localeEnMessages from "./locales/en";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { IntlProvider } from "react-intl";
+
+const lang = navigator.language.split(/[-_]/)[0];
+const messageLang = lang === 'es' ? localeEsMessages : localeEnMessages;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <IntlProvider locale={lang} messages= {messageLang}>
     <App />
-  </React.StrictMode>
+  </IntlProvider>
 );
 
 // If you want your app to work offline and load faster, you can change
